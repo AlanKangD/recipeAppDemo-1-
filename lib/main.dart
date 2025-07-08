@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'providers/recipe_provider.dart';
 import 'screens/favorite_screen.dart';
 import 'screens/home_screen.dart';
+import 'screens/search_screen.dart';
 import 'utils/constants.dart';
 import 'utils/theme.dart';
 
@@ -40,7 +41,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
+    const SearchScreen(),
     const FavoriteScreen(),
+    const SettingsScreen(),
   ];
 
   @override
@@ -57,16 +60,55 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             _currentIndex = index;
           });
         },
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        selectedItemColor: const Color(0xFF6abf69),
+        unselectedItemColor: AppColors.textSecondary,
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
+        unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: AppStrings.home,
+            label: '홈',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: '검색',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
-            label: AppStrings.favorites,
+            label: '즐겨찾기',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: '설정',
           ),
         ],
+      ),
+    );
+  }
+}
+
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFfdfdfd),
+      appBar: AppBar(
+        title: const Text('설정'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      body: const Center(
+        child: Text(
+          '설정 화면',
+          style: TextStyle(
+            fontSize: 18,
+            color: AppColors.textSecondary,
+          ),
+        ),
       ),
     );
   }

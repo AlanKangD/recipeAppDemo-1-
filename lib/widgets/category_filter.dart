@@ -30,34 +30,47 @@ class CategoryFilterWidget extends StatelessWidget {
 
           return Container(
             margin: const EdgeInsets.only(right: AppSizes.paddingSmall),
-            child: FilterChip(
-              label: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(category.icon),
-                  const SizedBox(width: 4),
-                  Text(
-                    category.name,
-                    style: TextStyle(
-                      color: isSelected ? Colors.white : AppColors.textPrimary,
-                      fontSize: 12,
-                      fontWeight:
-                          isSelected ? FontWeight.w600 : FontWeight.normal,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () => onCategorySelected(category.name),
+                borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSizes.paddingMedium,
+                    vertical: AppSizes.paddingSmall,
+                  ),
+                  decoration: BoxDecoration(
+                    color: isSelected ? AppColors.primary : Colors.transparent,
+                    borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
+                    border: Border.all(
+                      color: isSelected
+                          ? AppColors.primary
+                          : const Color(0xFF6abf69),
+                      width: 1,
                     ),
                   ),
-                ],
-              ),
-              selected: isSelected,
-              onSelected: (_) => onCategorySelected(category.name),
-              backgroundColor: AppColors.surface,
-              selectedColor: AppColors.primary,
-              checkmarkColor: Colors.white,
-              side: BorderSide(
-                color: isSelected ? AppColors.primary : AppColors.divider,
-                width: 1,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        category.icon,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        category.name,
+                        style: TextStyle(
+                          color:
+                              isSelected ? Colors.white : AppColors.textPrimary,
+                          fontSize: 12,
+                          fontWeight:
+                              isSelected ? FontWeight.w600 : FontWeight.normal,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           );
