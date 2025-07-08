@@ -105,3 +105,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+  # Custom fonts
+  fonts:
+    - family: Cafe24Ssurround
+      fonts:
+        - asset: assets/fonts/Cafe24Ssurround.ttf

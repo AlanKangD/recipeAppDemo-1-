@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/recipe_provider.dart';
 import '../utils/constants.dart';
+import '../widgets/brand_app_bar.dart';
 import '../widgets/category_filter.dart';
 import '../widgets/recipe_list_item.dart';
 import '../widgets/recommended_recipe_carousel.dart';
@@ -16,64 +17,32 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFfdfdfd),
-      body: SafeArea(
-        child: Consumer<RecipeProvider>(
-          builder: (context, recipeProvider, child) {
-            return Column(
-              children: [
-                // 상단 앱바
-                _buildAppBar(context),
-                // 추천 레시피 캐러셀
-                _buildRecommendedSection(context, recipeProvider),
-                // 카테고리 필터
-                _buildCategorySection(recipeProvider),
-                // 레시피 리스트
-                Expanded(
-                  child: _buildRecipeList(context, recipeProvider),
-                ),
-              ],
-            );
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAppBar(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: AppSizes.paddingMedium,
-      ),
-      child: Row(
-        children: [
-          // 앱 이름
-          const Text(
-            '냉털레시피',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: AppColors.textPrimary,
-            ),
-          ),
-          const Spacer(),
-          // 검색 버튼
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const SearchScreen(),
-                ),
-              );
-            },
-            icon: const Icon(
-              Icons.search,
-              color: AppColors.textPrimary,
-              size: 24,
-            ),
-          ),
-        ],
+      body: Consumer<RecipeProvider>(
+        builder: (context, recipeProvider, child) {
+          return Column(
+            children: [
+              // 브랜드 앱바
+              BrandAppBar(
+                onSearchPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SearchScreen(),
+                    ),
+                  );
+                },
+              ),
+              // 추천 레시피 캐러셀
+              _buildRecommendedSection(context, recipeProvider),
+              // 카테고리 필터
+              _buildCategorySection(recipeProvider),
+              // 레시피 리스트
+              Expanded(
+                child: _buildRecipeList(context, recipeProvider),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -94,6 +63,7 @@ class HomeScreen extends StatelessWidget {
               const Text(
                 '🔥 추천 레시피',
                 style: TextStyle(
+                  fontFamily: 'Cafe24Ssurround',
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                   color: AppColors.textPrimary,
@@ -151,6 +121,7 @@ class HomeScreen extends StatelessWidget {
           child: Text(
             '🧭 카테고리',
             style: TextStyle(
+              fontFamily: 'Cafe24Ssurround',
               fontSize: 18,
               fontWeight: FontWeight.w600,
               color: AppColors.textPrimary,
